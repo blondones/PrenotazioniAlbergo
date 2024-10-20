@@ -16,8 +16,13 @@ const createForm = (parentElement) => {
         </div>
         ${roomTypes.map((room) => {
           return `
-            `
-
+          <div>${room}  Numero di camere:<br>
+              <input id="${room} camere" type="number" />
+            </div>`;
+        }).join('\n')}
+        <button type='button' id='submit'>Invio</button>
+        <div id="ris"></div>`;
+            
             document.querySelector("#submit").onclick = () => {
                 const result = data.map((name) => {
                     return document.querySelector("#" + name).value;
