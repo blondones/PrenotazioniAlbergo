@@ -20,3 +20,39 @@ const fDates = () => {
     return dates;
 }
 
+/* Funzione per la creazione della Tabella*/
+const createTable = (information) => {
+    const div = document.getElementById("TableID");
+
+    let tableHTML = `
+    <table>
+        <thead>    
+            <tr> 
+                <th>Data</th>
+                <th>Singola</th>
+                <th>Doppia</th>
+                <th>Suite</th>
+            </tr>
+        </thead>
+    </table>
+    <tbody>
+    `;
+
+    fDates().forEach(date => {
+        tableHTML += `
+            <tr>
+                <td>${date}</td>
+                <td>${information[date]["Singola"]}</td>
+                <td>${information[date]["Doppia"]}</td>
+                <td>${information[date]["Suite"]}</td>
+            </tr>
+        `;
+    });
+
+    tableHTML += `
+        </tbody>
+    </table>
+    `;
+
+    div.innerHTML += tableHTML;
+}
