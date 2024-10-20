@@ -1,7 +1,21 @@
 //form
+const getDateKey = (date) => date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+
+let date = new Date();
+const datekeys = [];
+for (let i = 0; i < 30; i++) {
+    date.setDate(date.getDate() + 1);
+    const key = getDateKey(date);
+    datekeys.push(key);
+}
+const conf = {
+    "singola": 10,
+    "doppia": 5,
+    "suite": 3
+  }
 
 const createForm = (parentElement) => {
-    const roomTypes = [];
+    const roomTypes = Object.keys(conf);
     let callback = null;
 
     return {
@@ -12,24 +26,30 @@ const createForm = (parentElement) => {
             parentElement.innerHTML = `
         <div>
           Data prenotazione:<br>
-          <input id="data-prenotazione" type="date" />
+          <input id="bookingDate" type="date" />
         </div>
         ${roomTypes.map((room) => {
-          return `
+                return `
           <div>${room}  Numero di camere:<br>
-              <input id="${room} camere" type="number" />
+              <input id="${room} rooms" type="number" />
             </div>`;
-        }).join('\n')}
+            }).join('\n')}
         <button type='button' id='submit'>Invio</button>
         <div id="ris"></div>`;
-            
+
             document.querySelector("#submit").onclick = () => {
-                const result = data.map((name) => {
-                    return document.querySelector("#" + name).value;
-                });
-                callback(result);
-            }
-        },
+                const bookingDate = document.querySelector("#bookingDate").value;
+                const roomsBooked = roomTypes.map((room)) => {
+                  return {
+                     
+                  }  
+                }
+
+                
+            });
+            callback(result);
+        }
+    },
     };
 };
 
