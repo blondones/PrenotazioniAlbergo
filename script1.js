@@ -1,4 +1,5 @@
 //form
+
 const getDateKey = (date) => date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
 
 let date = new Date();
@@ -19,9 +20,12 @@ const createForm = (parentElement) => {
     let callback = null;
 
     return {
-        setLabels: (labels) => { data = labels; },
-        setRoomTypes: (type) => { roomTypes = types },
-        onsubmit: (callbackInput) => { callback = callbackInput },
+        setRoomTypes: (type) => {
+             roomTypes = types;
+             },
+        onsubmit: (callbackInput) => {
+             callback = callbackInput; 
+            },
         render: () => {
             parentElement.innerHTML = `
         <div>
@@ -39,21 +43,35 @@ const createForm = (parentElement) => {
 
             document.querySelector("#submit").onclick = () => {
                 const bookingDate = document.querySelector("#bookingDate").value;
-                const roomsBooked = roomTypes.map((room)) => {
+                const roomsBooked = roomTypes.map((room) => {
                   return {
-                     
-                  }  
-                }
+                     room,
+                     quantity: parseInt(document.querySelector(`#${room}-camere`).value),
+                     maxQuantity: conf[room]
+                  };  
+                });
+                let availableDate = bookingDate !== '';
 
-                
-            });
-            callback(result);
-        }
-    },
+                const risultato = document.querySelector("#ris");
+                if (availableDate) {
+                    risultato,innerText = "OK";
+                callback({
+                    dataPrenotazione,
+                    roomsBooked: roomsBooked.filter(c => c.quantity > 0)
+                  });
+                  document.querySelector("#data-prenotazione").value = '';
+                  roomTypes.forEach(room => {
+                    document.querySelector(`#${room}-camere`).value = '';
+                  });
+                } else {
+                    risultato.innerText = "KO";
+            }
+        };
+      },
     };
 };
 
 const form = createForm(document.querySelector('#app'));
-form.setLabels(["Nome", "Cognome", "Età"]);
+form.setRoomTypes(Object.keys(conf));
 form.onsubmit(console.log);
 form.render();
