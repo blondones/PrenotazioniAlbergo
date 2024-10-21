@@ -9,11 +9,12 @@ for (let i = 0; i < 30; i++) {
     const key = getDateKey(date);
     datekeys.push(key);
 }
+
 const conf = {
     "singola": 10,
     "doppia": 5,
     "suite": 3
-  }
+}
 
 const createForm = (parentElement) => {
     const roomTypes = Object.keys(conf);
@@ -21,11 +22,11 @@ const createForm = (parentElement) => {
 
     return {
         setRoomTypes: (type) => {
-             roomTypes = types;
-             },
+            roomTypes = types;
+        },
         onsubmit: (callbackInput) => {
-             callback = callbackInput; 
-            },
+            callback = callbackInput;
+        },
         render: () => {
             parentElement.innerHTML = `
         <div>
@@ -44,30 +45,37 @@ const createForm = (parentElement) => {
             document.querySelector("#submit").onclick = () => {
                 const bookingDate = document.querySelector("#bookingDate").value;
                 const roomsBooked = roomTypes.map((room) => {
-                  return {
-                     room,
-                     quantity: parseInt(document.querySelector(`#${room}-camere`).value),
-                     maxQuantity: conf[room]
-                  };  
+                    return {
+                        room,
+                        quantity: parseInt(document.querySelector(`#${room}rooms`).value),
+                        maxQuantity: conf[room]
+                    };
                 });
-                let availableDate = bookingDate !== '';
 
-                const risultato = document.querySelector("#ris");
-                if (availableDate) {
-                    risultato,innerText = "OK";
-                callback({
-                    dataPrenotazione,
-                    roomsBooked: roomsBooked.filter(c => c.quantity > 0)
-                  });
-                  document.querySelector("#data-prenotazione").value = '';
-                  roomTypes.forEach(room => {
-                    document.querySelector(`#${room}-camere`).value = '';
-                  });
+                let OneRoomAvailable = false;
+                for (let i = 0; i < roomsBooked.length; i++) {
+                    if (roomsBooked[i].quantity > 0) {
+                        OneRoomAvailable = true;
+                        break;
+                    }
+                }
+                let availableDate = bookingDate !== '';
+                const result = document.querySelector("#ris");
+                if (availableDate && OneRoomAvailable) {
+                    result, innerText = "OK";
+                    callback({
+                        availableDate,
+                        roomsBooked: roomsBooked.filter(c => c.quantity > 0)
+                    });
+                    document.querySelector("#bookingDate").value = '';
+                    roomTypes.forEach(room => {
+                        document.querySelector(`#${room}rooms`).value = '';
+                    });
                 } else {
-                    risultato.innerText = "KO";
-            }
-        };
-      },
+                    result.innerText = "KO";
+                }
+            };
+        },
     };
 };
 
