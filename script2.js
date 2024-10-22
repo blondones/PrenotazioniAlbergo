@@ -1,13 +1,5 @@
 /* Table */
 
-let availabilityData = {};
-const conf = {
-  singola: 10,
-  doppia: 5,
-  suite: 3
-};
-
-
 function initializeAvailability() {
   const dates = fDates();
   for (let i = 0; i < dates.length; i++) {
