@@ -15,6 +15,8 @@ const initializeAvailability = () => {
       Suite: roomConfig.suite
     };
   }
+
+  sendReservation(availabilityData);
 };
 
 const fDates = () => {
@@ -37,8 +39,8 @@ const fDates = () => {
 };
 
 const createTable = (information) => {
+  updateTable();
   const div = document.getElementById("TableID");
-  
   let tableHTML = 
     "<table border='1'>" +
       "<thead>" +
@@ -53,6 +55,7 @@ const createTable = (information) => {
 
   const dates = fDates();
   for (let i = 0; i < dates.length; i++) {
+    console.log(information[dates[i]]);
     tableHTML += 
       "<tr>" +
         "<td>" + dates[i] + "</td>" +
@@ -90,7 +93,7 @@ const addReservation = (reservation) => {
 
     availabilityData[date][roomType] -= quantity;
   }
-
+  sendReservation(availabilityData);
   createTable(availabilityData);
 };
 

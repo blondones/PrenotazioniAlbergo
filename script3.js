@@ -1,11 +1,11 @@
 /* Cache Remota */
 
 const sendReservation = (reservation) => {
-    fetch('https://ws.progettimolinari.it/cache/set', {
+    fetch('https://ws.cipiaceinfo.it/cache/set', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'key': '3b7fdbbe-8ca6-4031-b093-b8bcd544c993'
+            'key': '3d60697b-92ca-435d-85b4-33e5d6abe5a4'
         },
         body: JSON.stringify({
             key: 'prenotazione',
@@ -23,19 +23,20 @@ const sendReservation = (reservation) => {
 }
 
 const updateTable = () => {
-    fetch('https://ws.progettimolinari.it/cache/get', {
+    fetch('https://ws.cipiaceinfo.it/cache/get', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'key': '3b7fdbbe-8ca6-4031-b093-b8bcd544c993'
+            'key': '3d60697b-92ca-435d-85b4-33e5d6abe5a4'
         },
         body: JSON.stringify({
-            key: 'disponibilità'
+            key: 'prenotazione'
         })
     })
     .then(response => response.json())
     .then(data => {
-        createTable(data);
+        console.log(data.result);
+        createTable(data.result);
     })
     .catch(error => {
         console.log('Errore nel caricamento della tabella:', error);
