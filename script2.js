@@ -1,25 +1,23 @@
-/* Table */
-
 let availabilityData = {};
-const conf = {
+
+const roomConfig = {  
   singola: 10,
   doppia: 5,
   suite: 3
 };
 
-
-function initializeAvailability() {
+const initializeAvailability = () => {
   const dates = fDates();
   for (let i = 0; i < dates.length; i++) {
     availabilityData[dates[i]] = {
-      Singola: conf.singola,
-      Doppia: conf.doppia,
-      Suite: conf.suite
+      Singola: roomConfig.singola,
+      Doppia: roomConfig.doppia,
+      Suite: roomConfig.suite
     };
   }
-}
+};
 
-function fDates() {
+const fDates = () => {
   const dates = [];
   const today = new Date();
 
@@ -36,9 +34,9 @@ function fDates() {
   }
 
   return dates;
-}
+};
 
-function createTable(information) {
+const createTable = (information) => {
   const div = document.getElementById("TableID");
   
   let tableHTML = `
@@ -72,28 +70,38 @@ function createTable(information) {
   `;
 
   div.innerHTML = tableHTML;
-}
+};
 
-function addReservation(reservation) {
+const addReservation = (reservation) => {
   const date = reservation.date;
-  const roomsBooked = reservation.roomsBooked;
 
+  if (!availabilityData[date]) {
+    console.error(`Data ${date} non trovata nel sistema di disponibilità.`);
+    return;
+  }
+
+  const roomsBooked = reservation.roomsBooked;
 
   for (let i = 0; i < roomsBooked.length; i++) {
     const roomType = roomsBooked[i].room;
     const quantity = roomsBooked[i].quantity;
+
+    if (availabilityData[date][roomType] < quantity) {
+      console.error(`Non ci sono abbastanza stanze di tipo ${roomType} disponibili per la data ${date}.`);
+      continue;
+    }
+
     availabilityData[date][roomType] -= quantity;
   }
 
   createTable(availabilityData);
-}
-
+};
 
 initializeAvailability();
 createTable(availabilityData);
 
 const exampleReservation = {
-  date: "2025-03-15",
+  date: "2024-11-05",
   roomsBooked: [
     { room: 'Singola', quantity: 2 },
     { room: 'Suite', quantity: 1 }
