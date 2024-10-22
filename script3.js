@@ -36,7 +36,7 @@ const updateTable = () => {
     .then(response => response.json())
     .then(data => {
         console.log(data.result);
-        createTable(data.result);
+        //createTable(data.result);
     })
     .catch(error => {
         console.log('Errore nel caricamento della tabella:', error);

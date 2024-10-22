@@ -40,6 +40,7 @@ const fDates = () => {
 
 const createTable = (information) => {
   updateTable();
+  setTimeout(() => {
   const div = document.getElementById("TableID");
   let tableHTML = 
     "<table border='1'>" +
@@ -55,7 +56,8 @@ const createTable = (information) => {
 
   const dates = fDates();
   for (let i = 0; i < dates.length; i++) {
-    console.log(information[dates[i]]);
+    //console.log(information[dates[i]]);
+    console.log(i);
     tableHTML += 
       "<tr>" +
         "<td>" + dates[i] + "</td>" +
@@ -70,6 +72,7 @@ const createTable = (information) => {
     "</table>";
 
   div.innerHTML = tableHTML;
+},5000);
 };
 
 const addReservation = (reservation) => {
@@ -90,9 +93,14 @@ const addReservation = (reservation) => {
       console.error("Non ci sono abbastanza stanze di tipo " + roomType + " disponibili per la data " + date + ".");
       continue;
     }
-
-    availabilityData[date][roomType] -= quantity;
+    try{
+      availabilityData[date][roomType] -= quantity;
+    } catch (e){
+      console.log(e);
+    }
+    
   }
+  console.log(availabilityData);
   sendReservation(availabilityData);
   createTable(availabilityData);
 };
