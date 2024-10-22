@@ -17,11 +17,11 @@ const conf = {
 }
 
 const createForm = (parentElement) => {
-    const roomTypes = Object.keys(conf);
+    let roomTypes = Object.keys(conf);
     let callback = null;
 
     return {
-        setRoomTypes: (type) => {
+        setRoomTypes: (types) => {
             roomTypes = types;
         },
         onsubmit: (callbackInput) => {
@@ -79,7 +79,8 @@ const createForm = (parentElement) => {
     };
 };
 
-const form = createForm(document.querySelector('#app'));
+const form = createForm(document.querySelector('#FormDIV'));
 form.setRoomTypes(Object.keys(conf));
 form.onsubmit(console.log);
 form.render();
+

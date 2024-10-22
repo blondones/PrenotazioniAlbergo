@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 let availabilityData = {};
 
 const roomConfig = {  
@@ -7,6 +8,11 @@ const roomConfig = {
 };
 
 const initializeAvailability = () => {
+=======
+/* Table */
+
+function initializeAvailability() {
+>>>>>>> 607f68ac3e66e9b150f730bc90341c0494425816
   const dates = fDates();
   for (let i = 0; i < dates.length; i++) {
     availabilityData[dates[i]] = {
