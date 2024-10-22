@@ -10,9 +10,9 @@ const initializeAvailability = () => {
   const dates = fDates();
   for (let i = 0; i < dates.length; i++) {
     availabilityData[dates[i]] = {
-      Singola: roomConfig.singola,
-      Doppia: roomConfig.doppia,
-      Suite: roomConfig.suite
+      singola: roomConfig.singola,
+      doppia: roomConfig.doppia,
+      suite: roomConfig.suite
     };
   }
 
@@ -40,7 +40,6 @@ const fDates = () => {
 
 const createTable = (information) => {
   updateTable();
-  setTimeout(() => {
   const div = document.getElementById("TableID");
   let tableHTML = 
     "<table border='1'>" +
@@ -61,9 +60,9 @@ const createTable = (information) => {
     tableHTML += 
       "<tr>" +
         "<td>" + dates[i] + "</td>" +
-        "<td>" + information[dates[i]].Singola + "</td>" +
-        "<td>" + information[dates[i]].Doppia + "</td>" +
-        "<td>" + information[dates[i]].Suite + "</td>" +
+        "<td>" + information[dates[i]].singola + "</td>" +
+        "<td>" + information[dates[i]].doppia + "</td>" +
+        "<td>" + information[dates[i]].suite + "</td>" +
       "</tr>";
   }
 
@@ -72,7 +71,6 @@ const createTable = (information) => {
     "</table>";
 
   div.innerHTML = tableHTML;
-},5000);
 };
 
 const addReservation = (reservation) => {
@@ -111,8 +109,8 @@ createTable(availabilityData);
 const exampleReservation = {
   date: "2024-11-05",
   roomsBooked: [
-    { room: "Singola", quantity: 2 },
-    { room: "Suite", quantity: 1 }
+    { room: "singola", quantity: 2 },
+    { room: "suite", quantity: 1 }
   ]
 };
 

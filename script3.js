@@ -1,6 +1,7 @@
 /* Cache Remota */
 
 const sendReservation = (reservation) => {
+    console.log(reservation);
     fetch('https://ws.cipiaceinfo.it/cache/set', {
         method: 'POST',
         headers: {

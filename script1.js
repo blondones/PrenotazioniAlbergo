@@ -67,7 +67,7 @@ const createForm = (parentElement) => {
                 if (availableDate && OneRoomAvailable) {
                     result.innerText = "OK";
                     callback({
-                        availableDate,
+                        date: bookingDate,
                         roomsBooked: roomsBooked.filter(c => c.quantity > 0)
                     });
                     document.querySelector("#bookingDate").value = '';
@@ -84,5 +84,7 @@ const createForm = (parentElement) => {
 
 const form = createForm(document.querySelector('#FormDIV'));
 form.setRoomTypes(Object.keys(conf));
-form.onsubmit(console.log);
+form.onsubmit((ac) => {
+    addReservation(ac);
+});
 form.render();
