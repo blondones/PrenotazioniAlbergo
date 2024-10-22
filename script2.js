@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 let availabilityData = {};
 
 const roomConfig = {  
@@ -8,11 +7,6 @@ const roomConfig = {
 };
 
 const initializeAvailability = () => {
-=======
-/* Table */
-
-function initializeAvailability() {
->>>>>>> 607f68ac3e66e9b150f730bc90341c0494425816
   const dates = fDates();
   for (let i = 0; i < dates.length; i++) {
     availabilityData[dates[i]] = {
@@ -35,7 +29,7 @@ const fDates = () => {
     const month = ('0' + (newDate.getMonth() + 1)).slice(-2);
     const year = newDate.getFullYear();
 
-    const formattedDate = year + '-' + month + '-' + day;
+    const formattedDate = year + "-" + month + "-" + day;
     dates.push(formattedDate);
   }
 
@@ -45,35 +39,32 @@ const fDates = () => {
 const createTable = (information) => {
   const div = document.getElementById("TableID");
   
-  let tableHTML = `
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Data</th>
-          <th>Singola</th>
-          <th>Doppia</th>
-          <th>Suite</th>
-        </tr>
-      </thead>
-      <tbody>
-  `;
+  let tableHTML = 
+    "<table border='1'>" +
+      "<thead>" +
+        "<tr>" +
+          "<th>Data</th>" +
+          "<th>Singola</th>" +
+          "<th>Doppia</th>" +
+          "<th>Suite</th>" +
+        "</tr>" +
+      "</thead>" +
+      "<tbody>";
 
   const dates = fDates();
   for (let i = 0; i < dates.length; i++) {
-    tableHTML += `
-      <tr>
-        <td>${dates[i]}</td>
-        <td>${information[dates[i]].Singola}</td>
-        <td>${information[dates[i]].Doppia}</td>
-        <td>${information[dates[i]].Suite}</td>
-      </tr>
-    `;
+    tableHTML += 
+      "<tr>" +
+        "<td>" + dates[i] + "</td>" +
+        "<td>" + information[dates[i]].Singola + "</td>" +
+        "<td>" + information[dates[i]].Doppia + "</td>" +
+        "<td>" + information[dates[i]].Suite + "</td>" +
+      "</tr>";
   }
 
-  tableHTML += `
-      </tbody>
-    </table>
-  `;
+  tableHTML +=
+      "</tbody>" +
+    "</table>";
 
   div.innerHTML = tableHTML;
 };
@@ -82,7 +73,7 @@ const addReservation = (reservation) => {
   const date = reservation.date;
 
   if (!availabilityData[date]) {
-    console.error(`Data ${date} non trovata nel sistema di disponibilità.`);
+    console.error("Data " + date + " non trovata nel sistema di disponibilità.");
     return;
   }
 
@@ -93,7 +84,7 @@ const addReservation = (reservation) => {
     const quantity = roomsBooked[i].quantity;
 
     if (availabilityData[date][roomType] < quantity) {
-      console.error(`Non ci sono abbastanza stanze di tipo ${roomType} disponibili per la data ${date}.`);
+      console.error("Non ci sono abbastanza stanze di tipo " + roomType + " disponibili per la data " + date + ".");
       continue;
     }
 
@@ -109,8 +100,8 @@ createTable(availabilityData);
 const exampleReservation = {
   date: "2024-11-05",
   roomsBooked: [
-    { room: 'Singola', quantity: 2 },
-    { room: 'Suite', quantity: 1 }
+    { room: "Singola", quantity: 2 },
+    { room: "Suite", quantity: 1 }
   ]
 };
 
